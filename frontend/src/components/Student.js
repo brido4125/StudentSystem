@@ -55,11 +55,22 @@ export default function Student() {
   //DELETE
   const deleteHandler = (e) => {
     e.preventDefault();
-    console.log(deleteId);
     axios
       .delete("http://localhost:8080/student/" + deleteId)
       .then((response) => {
         console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  //DELETE ALL
+  const deleteAllHandler = (e) => {
+    e.preventDefault();
+    axios
+      .delete("http://localhost:8080/students")
+      .then((res) => {
+        console.log(res);
       })
       .catch((e) => {
         console.log(e);
@@ -80,7 +91,6 @@ export default function Student() {
           label="Student Name"
           variant="outlined"
           fullWidth
-          required="true"
           value={name}
           onChange={(e) => setName(e.target.value)}
           error={name === "" ? true : false}
@@ -90,7 +100,6 @@ export default function Student() {
           label="Student Address"
           variant="outlined"
           fullWidth
-          required
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           error={address === "" ? true : false}
@@ -117,6 +126,9 @@ export default function Student() {
           value={deleteId}
         >
           삭제하기
+        </Button>
+        <Button variant="outlined" color="primary" onClick={deleteAllHandler}>
+          모두 삭제하기
         </Button>
       </Container>
     </Box>

@@ -11,6 +11,8 @@ public interface StudentService {
 
     public void delete(int id);
 
+    public void deleteAll();
+
     public Student get(Integer id);
 
 }

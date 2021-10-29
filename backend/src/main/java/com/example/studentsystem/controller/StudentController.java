@@ -1,5 +1,6 @@
 package com.example.studentsystem.controller;
 
+import com.example.studentsystem.exception.NoMemberException;
 import com.example.studentsystem.model.Student;
 import com.example.studentsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,16 @@ public class StudentController {
 
         }catch (EmptyResultDataAccessException e){
             return "존재하지 않는 ID 값입니다.";
+        }
+    }
+
+    @DeleteMapping("/students")
+    public String deleteAll() {
+        try {
+            studentService.deleteAll();
+            return "Delete All student completed";
+        } catch (NoMemberException e) {
+            return "repo내에 멤버가 존재하지 않습니다.";
         }
     }
 }
